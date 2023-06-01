@@ -34,25 +34,10 @@ class Sidebar extends AbstractWidget
     {
         $elements = [
             'home' => new SidebarItem('Ana Sayfa', 'bxs-dashboard', route('backend.home'), 'home_view'),
-            'service' => new SidebarItem('Hizmetler', 'bx-layer', route('backend.services.index'), 'services_index'),
-            'employee' => new SidebarItem('Çalışanlar', 'bx-user-circle', route('backend.employees.index'), 'employees_index'),
-            'customer' => new SidebarItem('Müşteriler', 'ri-briefcase-2-line', route('backend.customers.index'), 'customers_index'),
-            'project' => new SidebarItem('Projeler', 'ri-lightbulb-flash-line', route('backend.projects.index'), 'projects_index'),
 
-            /*'payment_managements' => new SidebarItem('Ödemeler', 'bx-money', 'javascript:void(0);', 'payment_view', '', [
-                'payment' => new SidebarItem('Ödeme Listesi', 'ri-briefcase-2-line', route('backend.payments.list'), 'payments_list'),
-                'payment_link' => new SidebarItem('Ödeme Linkleri', 'ri-briefcase-2-line', route('backend.payment_links.index'), 'payment_links_index'),
-            ]),*/
-
-            'task' => new SidebarItem('Görevler', 'bx-edit', route('backend.tasks.index'), 'tasks_index'),
-            'ticket' => new SidebarItem('Destek Sistemi', 'bx-aperture', route('backend.tickets.index'), 'tickets_index'),
-            'note' => new SidebarItem('Notlar', 'bx-file', route('backend.notes.index'), 'notes_index'),
-
-            'role' => new SidebarItem('Roller', 'mdi mdi-cog-outline', route('backend.role.index'), 'role_index'),
-
-            /*'settings' => new SidebarItem('Ayarlar', 'mdi mdi-cog-outline', '', 'setting_view', '', [
+            'settings' => new SidebarItem('Ayarlar', 'mdi mdi-cog-outline', '', 'setting_view', '', [
                 'config' => new SidebarItem('Ayarlar', 'fa-th-large', route('backend.config.index'), 'config_index'),
-            ]),*/
+            ]),
         ];
 
         return $elements;

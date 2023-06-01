@@ -7,53 +7,6 @@ use Intervention\Image\Facades\Image;
 
 trait FileUpload
 {
-    public static function imageUpload($param = array())
-    {
-        $file = $param["file"];
-        $module = $param["module"];
-        if (array_key_exists('slug', $param)) {
-            $slug = $param['slug'];
-        }
-        if ($file) {
-            if (isset($slug)) {
-                $imageName = $slug . "-" . rand(000000, 999999) . '.jpg';
-
-            } else {
-                $imageName = date('Y-m-d-H-i') . "-" . rand(000000, 999999) . '.jpg';
-            }
-
-            $newPath = 'uploads/' . $module . '/';
-            $path = 'uploads/' . $module . '/';
-            $imagePath = $path . $imageName;
-            Storage::disk('public')->put($imagePath, file_get_contents($file));
-            $imageSize = config('image.' . $module);
-
-            foreach ($imageSize as $sizeName => $size) {
-                $width = config('image.' . $module . '.' . $sizeName . '.width');
-                $height = config('image.' . $module . '.' . $sizeName . '.height');
-                $canvas = config('image.' . $module . '.' . $sizeName . '.canvas');
-                $img = Image::make(Storage::disk('public')->path($imagePath));
-                if ($img->width() <= $img->height()) {
-                    $img->resize(null, $height, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                } else {
-                    $img->resize($width, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                }
-                if ($canvas == true) {
-                    $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
-                }
-
-                $wh = $width . 'x' . $height;
-                $pos = strripos($imageName, '.');
-                $img->save(Storage::disk('public')->path($newPath . substr($imageName, 0, $pos) . '_' . $wh . substr($imageName, $pos)), 100);
-            }
-            return "/storage/uploads/" . $module . "/" . $imageName;
-        }
-    }
-
     public static function imageUrl($module, $dimension, $image)
     {
         $based = $module;
